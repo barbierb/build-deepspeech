@@ -31,9 +31,19 @@ jobs:
 
       # Run s a set of commands using the runners shell
       - name: Setup Bazel
-        uses: abhinavsingh/setup-bazel@v3
+        uses: jwlawson/actions-setup-bazel@v1.6
         with:
-          version: 3.1.0
+          # The version of bazel to setup. E.g. 2.0.0
+          bazel-version: 3.1.0
+          
+          
+      - name: install python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+          
+          
       - name: install deepspeech
         run: |
           git clone https://github.com/mozilla/DeepSpeech.git
