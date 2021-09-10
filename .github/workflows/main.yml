@@ -37,6 +37,7 @@ jobs:
       - name: install deepspeech
         run: |
           git clone https://github.com/mozilla/DeepSpeech.git
+          cd DeepSpeech
           git submodule sync tensorflow/
           git submodule update --init tensorflow/
       - name: TensorFlow Configure with Bazel
