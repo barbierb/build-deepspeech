@@ -42,5 +42,10 @@ jobs:
           git submodule update --init tensorflow/
       - name: TensorFlow Configure with Bazel
         run: |
-          cd tensorflow
+          cd DeepSpeech/tensorflow
           ./configure
+      - name: Compile DeepSpeech
+        run: |
+          cd DeepSpeech/tensorflow/tensorflow
+          ln -s ../native_client
+      
