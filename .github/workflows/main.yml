@@ -40,7 +40,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           body: "compiled deepspeech for windows DONOTKEEP"
+          tag: ${{ env.TAG_NAME }}
           file: DeepSpeech/
           file_glob: true
-          tag: ${{ env.TAG_NAME }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
