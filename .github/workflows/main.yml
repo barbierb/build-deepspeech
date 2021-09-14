@@ -39,8 +39,14 @@ jobs:
       - name: release
         uses: svenstaro/upload-release-action@v2
         with:
-          body: "compiled deepspeech for windows DONOTKEEP"
-          tag: ${{ env.TAG_NAME }}
-          file: DeepSpeech/
-          file_glob: true
           repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: DeepSpeech/
+          asset_name: mything
+          tag: ${{ env.TAG_NAME }}
+          file_glob: true    
+          overwrite: true
+          body: "This is my release text"
+          
+      - name: Run a one-line script
+        run: echo Hello, world!
+
