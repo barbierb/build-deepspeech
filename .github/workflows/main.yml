@@ -42,7 +42,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: DeepSpeech/
           asset_name: mything
-          tag: ${{ env.TAG_NAME }}
+          tag: ${{ github.ref }}
           file_glob: true    
           overwrite: true
           body: "This is my release text"
