@@ -29,35 +29,9 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-      # Run s a set of commands using the runners shell
-      - name: Setup Bazel
-        uses: jwlawson/actions-setup-bazel@v1
-        with:
-          bazel-version: '3.5.0'
-          
-          
-      - name: install python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-          
-          
       - name: install deepspeech
         run: |
           git clone https://github.com/mozilla/DeepSpeech.git
-          cd DeepSpeech
-          git submodule sync tensorflow/
-          git submodule update --init tensorflow/
-      - name: TensorFlow Configure with Bazel
-        run: |
-          cd DeepSpeech/tensorflow
-          ./configure
-      - name: Compile DeepSpeech
-        run: |
-          cd DeepSpeech/tensorflow/tensorflow
-          bazel --version
-          bazel build --workspace_status_command="bash native_client/bazel_workspace_status_cmd.sh" --config=monolithic -c opt --copt="-D_GLIBCXX_USE_CXX11_ABI=0" //native_client:libdeepspeech.so
           
       - name: generate-tag-name
         run: echo "TAG_NAME=refs/tags/v$(date '+%Y%m%d_3')" >> $GITHUB_ENV
@@ -66,7 +40,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           body: "compiled deepspeech for windows DONOTKEEP"
-          file: bazel-bin/*.*
+          file: DeepSpeech/
           file_glob: true
           tag: ${{ env.TAG_NAME }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
